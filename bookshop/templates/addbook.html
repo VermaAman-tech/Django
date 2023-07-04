@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/styles.css">
+    <title>AddBook Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+  </head>
+  <body style="background-color:antiquewhite">
+    {% if messages %}
+    {% for message in messages %}
+     <div class="alert alert-{{message.tags}} alert-dismissible fade show my-0" role="alert">
+        {{message}}
+       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+       </button>
+     </div>
+     {% endfor %}
+     {% endif %}
+    <div class="wallpaper">
+      <nav class="navbar navbar-expand-lg navbar-light bg-transparent"  >
+          <a class="navbar-brand" href="#" style="color:orange"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-journal-check" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M10.854 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 8.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+              <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
+              <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/></svg>Aman's BookStore</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" style="background-color:orange" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'index' %}" style="background-color:orange">Contact Us</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" style="background-color:orange" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Change Page
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                 
+                  <a class="dropdown-item"  href={% url 'bookstore2' %}>Go to Page2</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item"  href={% url 'bookstore3' %}>Go to Page3</a>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'addbook' %}" style="background-color:orange">Add your Book</a>
+              </li>
+            </ul>
+            <form method="get" action="/search"class=" form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" name="query" id="query" type="search" placeholder="Author/Title" aria-label="Let's Go">
+              <button class="btn btn-outline-success my-2 my-sm-0" style="background-color:orange"  type="submit">Search</button>
+            </form>
+          </div>
+        </nav>
+  
+        <h1 id="heading">Want to add your Book?</h1><h1><span style="text-align:center">Fill the Form Below</span> </h1>
+  </div>
+  <div id="BookForm" class="container mt-5">
+    <h3>Add Book Form</h3>
+    <form  method="post"  class="row g-3">
+      {% csrf_token %}
+        <div class="col-md-6">
+            <label for="Author"  class="form-label">Author</label>
+            <input type="text" name="author" class="form-control" id="author" required>
+            
+        </div>
+        <div class="col-md-6">
+            <label for="Title" class="form-label">Title</label>
+            <input type="text" name="title"  class="form-control" id="title" required>
+        </div>
+        <div class="col-md-4">
+            <label for="Price"  class="form-label">Price(Rs)</label>
+            <input type="Number" name="price" class="form-control" id="price" placeholder="Rs">
+        </div>
+        <div class="col-md-12">
+            <label for="description"  class="form-label">Add Book Description</label>
+            <textarea class="form-control" name="description" id="description" rows="3"></textarea>
+        </div>
+        <div class="col-md-12 ">
+            <button type="submit" id="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+  </div>
+  {% block body %}  {% endblock body %}
+
+  <div id="pagenav" style="text-align:center; background-color:black;">
+    <p><a href="{% url 'index' %}">Page 1 </a>        <a href="{% url 'bookstore2' %}">Page 2 </a>       <a href="{% url 'bookstore3' %}">Page 3</a>         <a href="{% url 'addbook' %}">Add Your Book</a>  </p>
+  </div>
+
+
+
+
+
+      <div id="Us">
+
+  
+
+        <footer id="AboutUs" class="py-3 my-4">
+          <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item"><a href="{% url 'bookstore2' %}" class="nav-link px-2 text-muted">BookStore Home</a></li>
+           
+ 
+          </ul>
+          <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+              <li class="nav-item"><a href="https://www.twitter.com" class="nav-link px-2 ">Twitter</a></li>
+              <li class="nav-item"><a href="https://www.youtube.com" class="nav-link px-2 ">Youtube</a></li>
+              <li class="nav-item"><a href="https://www.facebook.com" class="nav-link px-2 ">Facebook</a></li>
+              <li class="nav-item"><a href="https://www.instagram.com" class="nav-link px-2 ">Instagram</a></li>
+            </ul>
+          <p class="text-center text-muted">© 2023 Aman's BookStore, Inc</p>
+          
+        </footer>
+      </div>
+  </body>
+  
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
